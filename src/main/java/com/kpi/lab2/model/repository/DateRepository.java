@@ -9,11 +9,7 @@ import java.util.List;
 @Repository
 public interface DateRepository extends CrudRepository<Date, Long> {
 
-    //Date getDateByDayAndMonthAndYear(byte day, String month, int year);
-
     Date findByDayAndMonthAndYear(byte day, String month, int year);
-
-    List<Date> findAll();
 
     Boolean existsByDayAndMonthAndYear(byte day, String month, int year);
 

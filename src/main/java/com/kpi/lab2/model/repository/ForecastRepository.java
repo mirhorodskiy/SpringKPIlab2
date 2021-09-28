@@ -18,7 +18,5 @@ public interface ForecastRepository extends CrudRepository<Forecast, Long> {
     @Query("select distinct f from Forecast f where f.location.id = ?1 and f.date.id = ?2")
     Forecast findByLocationAndDate(long locationId, long dateId);
 
-
-
     Boolean existsByLocationAndDate(Location location, Date date);
 }

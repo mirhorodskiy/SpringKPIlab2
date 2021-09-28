@@ -14,9 +14,6 @@ import javax.validation.constraints.Min;
 @Builder
 public class DateDto {
 
-
-    @Min(value = 1)
-    @Max(value = 30)
     private Byte day;
 
     private String month;

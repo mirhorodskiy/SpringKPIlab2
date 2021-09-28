@@ -60,12 +60,6 @@ public class AdminService {
     public ForecastDto addForecastWithLocationAndDate(ForecastWrapper forecastWrapper) {
 
 
-//        Date date = forecastWrapperMapper.dateDtoToEntity(forecastWrapper.getDate());
-//
-//        Location location = forecastWrapperMapper.locationDtoToEntity(forecastWrapper.getLocationDto());
-//
-//        Forecast forecast = forecastWrapperMapper.forecastDtoToEntity(forecastWrapper.getForecastDto());
-
         Date date = dateRepository.findByDayAndMonthAndYear(forecastWrapper.getDate().getDay(),
                 forecastWrapper.getDate().getMonth(), forecastWrapper.getDate().getYear());
         if (date == null) {
@@ -94,7 +88,6 @@ public class AdminService {
         dateRepository.save(date);
         locationRepository.save(location);
         forecastRepository.save(forecast);
-        System.out.println("forecast saved");
 
         return forecastWrapper.getForecastDto();
     }
