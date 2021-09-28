@@ -7,9 +7,11 @@ import javax.persistence.*;
 import java.util.Set;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
 public class Date {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,7 @@ public class Date {
     private String month;
 
     @Column
-    private String year;
+    private int year;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "date")

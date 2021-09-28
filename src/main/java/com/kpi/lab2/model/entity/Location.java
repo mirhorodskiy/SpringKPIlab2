@@ -1,17 +1,17 @@
 package com.kpi.lab2.model.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
 public class Location {
 
     @Id
@@ -27,7 +27,7 @@ public class Location {
     private String region;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "location")
-    private Forecast forecastSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    private Set<Forecast> forecastSet;
 
 }

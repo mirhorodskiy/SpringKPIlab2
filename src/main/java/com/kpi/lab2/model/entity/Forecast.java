@@ -2,16 +2,16 @@ package com.kpi.lab2.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
 public class Forecast {
 
     @Id
@@ -29,7 +29,7 @@ public class Forecast {
     @Column
     String description;
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
     private Location location;
 
