@@ -9,7 +9,6 @@ import com.kpi.lab2.model.entity.Forecast;
 import com.kpi.lab2.model.entity.Location;
 import com.kpi.lab2.model.mapper.DateMapper;
 import com.kpi.lab2.model.mapper.ForecastMapper;
-import com.kpi.lab2.model.mapper.ForecastWrapperMapper;
 import com.kpi.lab2.model.mapper.LocationMapper;
 import com.kpi.lab2.model.repository.DateRepository;
 import com.kpi.lab2.model.repository.ForecastRepository;
@@ -60,10 +59,10 @@ public class AdminService {
     public ForecastDto addForecastWithLocationAndDate(ForecastWrapper forecastWrapper) {
 
 
-        Date date = dateRepository.findByDayAndMonthAndYear(forecastWrapper.getDate().getDay(),
-                forecastWrapper.getDate().getMonth(), forecastWrapper.getDate().getYear());
+        Date date = dateRepository.findByDayAndMonthAndYear(forecastWrapper.getDateDto().getDay(),
+                forecastWrapper.getDateDto().getMonth(), forecastWrapper.getDateDto().getYear());
         if (date == null) {
-            date = addDate(forecastWrapper.getDate());
+            date = addDate(forecastWrapper.getDateDto());
         }
 
         Location location = locationRepository.findByCityTitleAndRegion(forecastWrapper.getLocationDto().getCityTitle(),

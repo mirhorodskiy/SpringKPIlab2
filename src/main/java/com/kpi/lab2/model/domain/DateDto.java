@@ -1,9 +1,6 @@
 package com.kpi.lab2.model.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -12,11 +9,13 @@ import javax.validation.constraints.Min;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
 public class DateDto {
 
-    private Byte day;
+    private byte day;
 
     private String month;
 
-    private Integer year;
+    private int year;
 }

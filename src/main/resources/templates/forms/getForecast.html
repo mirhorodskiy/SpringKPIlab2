@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Forecast</title>
+</head>
+<body>
+    <p th:text="'Temperature: ' + ${forecast.getTemperature()}"></p>
+    <p th:text="'RainChance: ' + ${forecast.getRainChance()}"></p>
+    <p th:text="'Description: ' + ${forecast.getDescription()}"></p>
+</body>
+</html>

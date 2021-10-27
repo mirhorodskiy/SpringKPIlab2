@@ -37,5 +37,12 @@ public class Forecast {
     @JsonIgnore
     private Date date;
 
-
+    @Override
+    public String toString() {
+        return "Forecast{" +
+                "temperature=" + temperature +
+                ", rainChance=" + rainChance +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

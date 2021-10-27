@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ForecastWrapper {
 
-    DateDto date;
+    DateDto dateDto;
 
     ForecastDto forecastDto;
 

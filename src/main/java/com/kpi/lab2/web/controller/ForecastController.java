@@ -25,10 +25,12 @@ public class ForecastController {
     @GetMapping()
     public Forecast getForecast(@RequestParam String cityTitle,
                                 @RequestParam int day,
-                                @RequestParam String month, int year)
+                                @RequestParam String month,
+                                @RequestParam int year)
             throws ForecastIsNotExistsException, DateIsNotExistsException, CityIsNotExistsException {
 
         return forecastService.getForecast(cityTitle, day, month, year);
 
     }
+
 }
