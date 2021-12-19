@@ -7,6 +7,7 @@ import com.kpi.lab2.model.domain.LocationDto;
 import com.kpi.lab2.model.entity.Date;
 import com.kpi.lab2.model.entity.Forecast;
 import com.kpi.lab2.model.entity.Location;
+import com.kpi.lab2.model.exception.ForecastIsNotExistsException;
 import com.kpi.lab2.model.mapper.DateMapper;
 import com.kpi.lab2.model.mapper.ForecastMapper;
 import com.kpi.lab2.model.mapper.LocationMapper;
@@ -15,6 +16,8 @@ import com.kpi.lab2.model.repository.ForecastRepository;
 import com.kpi.lab2.model.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -56,7 +59,7 @@ public class AdminService {
     }
 
 
-    public ForecastDto addForecastWithLocationAndDate(ForecastWrapper forecastWrapper) {
+    public Forecast addForecastWithLocationAndDate(ForecastWrapper forecastWrapper) {
 
 
         Date date = dateRepository.findByDayAndMonthAndYear(forecastWrapper.getDateDto().getDay(),
@@ -88,6 +91,24 @@ public class AdminService {
         locationRepository.save(location);
         forecastRepository.save(forecast);
 
-        return forecastWrapper.getForecastDto();
+        return forecast;
+    }
+
+    public Forecast updateForecast(Long id, ForecastWrapper forecastWrapper) throws ForecastIsNotExistsException {
+        Optional<Forecast> forecast = forecastRepository.findById(id);
+        if (forecast.isEmpty()) {
+            throw new ForecastIsNotExistsException("No such forecast");
+        }
+        Forecast forecast1 = forecast.get();
+
+//        forecast1.setLocation(locationMapper.locationDtoToEntity(forecastWrapper.getLocationDto()));
+//        forecast1.setDate(dateMapper.dateDtoToEntity(forecastWrapper.getDateDto()));
+        forecast1.setDescription(forecastWrapper.getForecastDto().getDescription());
+        forecast1.setRainChance(forecastWrapper.getForecastDto().getRainChance());
+        forecast1.setTemperature(forecastWrapper.getForecastDto().getTemperature());
+
+        return forecastRepository.save(forecast1);
+
+
     }
 }
