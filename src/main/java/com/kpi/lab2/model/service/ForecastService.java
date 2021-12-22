@@ -10,6 +10,8 @@ import com.kpi.lab2.model.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ForecastService {
 
@@ -47,4 +49,6 @@ public class ForecastService {
     public void removeForecast(String cityTitle, int day, String month, int year) throws ForecastIsNotExistsException, DateIsNotExistsException, CityIsNotExistsException {
         forecastRepository.delete(getForecast(cityTitle, day, month, year));
     }
+
+
 }

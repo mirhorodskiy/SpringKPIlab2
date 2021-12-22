@@ -8,6 +8,7 @@ import com.kpi.lab2.model.entity.Date;
 import com.kpi.lab2.model.entity.Forecast;
 import com.kpi.lab2.model.entity.Location;
 import com.kpi.lab2.model.exception.ForecastIsNotExistsException;
+import com.kpi.lab2.model.exception.ShortForecastDescriptionException;
 import com.kpi.lab2.model.mapper.DateMapper;
 import com.kpi.lab2.model.mapper.ForecastMapper;
 import com.kpi.lab2.model.mapper.LocationMapper;
@@ -16,6 +17,7 @@ import com.kpi.lab2.model.repository.ForecastRepository;
 import com.kpi.lab2.model.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -58,8 +60,8 @@ public class AdminService {
         return forecastRepository.save(forecast);
     }
 
-
-    public Forecast addForecastWithLocationAndDate(ForecastWrapper forecastWrapper) {
+    @Transactional
+    public Forecast addForecastWithLocationAndDate(ForecastWrapper forecastWrapper) throws ShortForecastDescriptionException {
 
 
         Date date = dateRepository.findByDayAndMonthAndYear(forecastWrapper.getDateDto().getDay(),
@@ -90,6 +92,10 @@ public class AdminService {
         dateRepository.save(date);
         locationRepository.save(location);
         forecastRepository.save(forecast);
+
+        if (forecast.getDescription().length() < 5) {
+            throw new ShortForecastDescriptionException("Forecast description too sort! There must be at least 5 symbols");
+        }
 
         return forecast;
     }

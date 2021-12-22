@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Tag(name = "Forecast", description = "User controller, show forecast")
 @RestController
 @RequestMapping("/forecast")
@@ -25,7 +27,9 @@ public class ForecastController {
         this.forecastService = forecastService;
     }
 
-    @Operation(summary = "Get forecast by city, day, month, year params", tags = "Forecast")
+    @Operation(summary = "Get forecast by city, day, month, year params", tags = "Forecast",
+            description = "This method returns  forecast by users city, day, month and year request params. " +
+                    "Return forecast with 200 status code or error with status code 400 if some data was wrong")
     @GetMapping()
     public Forecast getForecast(@RequestParam String cityTitle,
                                 @RequestParam int day,
@@ -36,5 +40,6 @@ public class ForecastController {
         return forecastService.getForecast(cityTitle, day, month, year);
 
     }
+
 
 }
