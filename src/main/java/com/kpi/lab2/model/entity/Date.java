@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 public class Date {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     @Column(name = "date_id")
     private Long id;

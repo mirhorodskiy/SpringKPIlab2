@@ -9,14 +9,6 @@ import java.util.List;
 @Repository
 public interface DateRepository extends CrudRepository<Date, Long> {
 
-    @Override
-    <S extends Date> S save(S s);
-
-    @Override
-    void delete(Date date);
-
-    @Override
-    List<Date> findAll();
 
     Date findByDayAndMonthAndYear(byte day, String month, int year);
 
