@@ -6,6 +6,9 @@ import com.kpi.lab2.model.exception.DateIsNotExistsException;
 import com.kpi.lab2.model.exception.ForecastIsNotExistsException;
 import com.kpi.lab2.model.service.ForecastService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +31,12 @@ public class ForecastController {
     }
 
     @Operation(summary = "Get forecast by city, day, month, year params", tags = "Forecast",
-            description = "This method returns  forecast by users city, day, month and year request params. " +
-                    "Return forecast with 200 status code or error with status code 400 if some data was wrong")
+            description = "This method returns  forecast by users city, day, month and year request params.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Forecast returned"),
+            @ApiResponse(responseCode = "404", description = "Invalid request data")
+    })
+
     @GetMapping()
     public Forecast getForecast(@RequestParam String cityTitle,
                                 @RequestParam int day,

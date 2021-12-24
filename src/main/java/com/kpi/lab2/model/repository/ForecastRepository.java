@@ -12,10 +12,6 @@ import java.util.List;
 @Repository
 public interface ForecastRepository extends CrudRepository<Forecast, Long> {
 
-    //Forecast findByLocationAndDate(Location location, Date date);
-
-//    @Query("select distinct f from Forecast f where f.location.id = ?1 and f.date.id = ?2")
-//    Forecast findByLocationAndDate(Location location, Date date);
 
     @Query("select distinct f from Forecast f where f.location.id = ?1 and f.date.id = ?2")
     Forecast findByLocationAndDate(long locationId, long dateId);
